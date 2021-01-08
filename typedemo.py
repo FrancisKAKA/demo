@@ -1,6 +1,6 @@
-def my_abs(a:float) -> float:
-    if a > 0:
-        result = a
+def my_abs(num: float) -> float:
+    if num > 0:
+        result = num
     else:
-        result = -a
+        result = -num
     return result
