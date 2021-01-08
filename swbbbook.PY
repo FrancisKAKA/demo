@@ -1,37 +1,139 @@
 import random
-# 技能价格不能一样
-JN1 = 2
-JN2 = 4
-JN3 = 6
-JN4 = 8
+# 不能一样
+JN1 = 5
+JN2 = 8
+JN3 = 9
+JN4 = 13
+JN5 = 3
 
-sum_spend = 0
-state = 0
-count = 0
+sum_spend_list = []
 
-ALL_JN = set()
+for i in range(1000):
+    spend = 0
+    count = 0
+    ALL_JN = set()
+    # while True:
+    #     ran_num = random.random()
+    #     if len(ALL_JN) == 0:
+    #             ALL_JN.add(JN1)
+    #             count += 1
+    #             spend += JN1
 
-while state < 5:
-    ran_num = random.random()
-    if len(ALL_JN) == 0:
-        sum_spend += JN1
-        ALL_JN.add(JN1)
-    elif len(ALL_JN) == 1: # 4选3
-        if ran_num <= 0.75: # 成功75%
-            if JN2 not in ALL_JN:
-                ALL_JN.add(JN2)
-                sum_spend += JN2
-            else:
+    #     elif len(ALL_JN) == 1:
+    #         SPARE_JN = {JN1,JN2}
+    #         GET_JN = SPARE_JN - ALL_JN    # 将要打的技能
+    #         if ran_num <= 0.8:
+    #             ALL_JN.add(list(GET_JN)[0])
+    #             count += 1
+    #         else:
+    #             ALL_JN.pop()
+    #             ALL_JN.add(list(GET_JN)[0])
+    #             count += 1
+    #         spend += list(GET_JN)[0]
+
+    #     elif len(ALL_JN) == 2:
+    #         SPARE_JN = {JN1,JN2,JN3}
+    #         GET_JN = SPARE_JN - ALL_JN    # 将要打的技能
+    #         if ran_num <= 0.6:
+    #             ALL_JN.add(list(GET_JN)[0])
+    #             count += 1
+    #         else:
+    #             ALL_JN.pop()   # 顶掉的技能
+    #             ALL_JN.add(list(GET_JN)[0])  
+    #             count += 1
+    #         spend += list(GET_JN)[0]
+
+    #     elif len(ALL_JN) == 3:
+    #         SPARE_JN = {JN1,JN2,JN3,JN4}
+    #         GET_JN = SPARE_JN - ALL_JN    # 将要打的技能
+    #         if ran_num <= 0.4:
+    #             ALL_JN.add(list(GET_JN)[0])
+    #             count += 1
+    #         else:
+    #             ALL_JN.pop()   # 顶掉的技能
+    #             ALL_JN.add(list(GET_JN)[0])  
+    #             count += 1
+    #         spend += list(GET_JN)[0]
+    #     # 直接五技能，没有内丹
+    #     elif len(ALL_JN) == 4:
+    #         SPARE_JN = {JN1,JN2,JN3,JN4,JN5}
+    #         GET_JN = SPARE_JN - ALL_JN    # 将要打的技能
+    #         if ran_num <= 0.2:
+    #             ALL_JN.add(list(GET_JN)[0])
+    #             count += 1
+    #         else:
+    #             ALL_JN.pop()   # 顶掉的技能
+    #             ALL_JN.add(list(GET_JN)[0])  
+    #             count += 1
+    #         spend += list(GET_JN)[0]
+        
+    #     elif len(ALL_JN) == 5:
+    #         print(spend)
+    #         sum_spend_list.append(spend)
+    #         break
+    #     # print(f"目前状态：{ALL_JN}，第{count}打书，花费了{spend}")
+    # print(f"五技能模板：第{i}轮，平均花费{sum(sum_spend_list)/len(sum_spend_list)}")
+
+
+    while True:
+        ran_num = random.random()
+        if len(ALL_JN) == 0:
                 ALL_JN.add(JN1)
-                sum_spend += JN1
-        else:   # 失败25%
-            ALL_JN.pop()
-            if JN2 not in ALL_JN:
-                ALL_JN.add(JN2)
-                sum_spend += JN2
+                count += 1
+                spend += JN1
+
+        elif len(ALL_JN) == 1:
+            SPARE_JN = {JN1,JN2}
+            GET_JN = SPARE_JN - ALL_JN    # 将要打的技能
+            if ran_num <= 0.75:
+                ALL_JN.add(list(GET_JN)[0])
+                count += 1
             else:
-                ALL_JN.add(JN1)
-                sum_spend += JN1
-    elif len(ALL_JN) == 2: # 4选2
-        print(sum_spend)
-        break
+                ALL_JN.pop()
+                ALL_JN.add(list(GET_JN)[0])
+                count += 1
+            spend += list(GET_JN)[0]
+
+        elif len(ALL_JN) == 2:
+            SPARE_JN = {JN1,JN2,JN3}
+            GET_JN = SPARE_JN - ALL_JN    # 将要打的技能
+            if ran_num <= 0.5:
+                ALL_JN.add(list(GET_JN)[0])
+                count += 1
+            else:
+                ALL_JN.pop()   # 顶掉的技能
+                ALL_JN.add(list(GET_JN)[0])  
+                count += 1
+            spend += list(GET_JN)[0]
+
+        elif len(ALL_JN) == 3:
+            SPARE_JN = {JN1,JN2,JN3,JN4}
+            GET_JN = SPARE_JN - ALL_JN    # 将要打的技能
+            if ran_num <= 0.25:
+                ALL_JN.add(list(GET_JN)[0])
+                count += 1
+            else:
+                ALL_JN.pop()   # 顶掉的技能
+                ALL_JN.add(list(GET_JN)[0])  
+                count += 1
+            spend += list(GET_JN)[0]
+        # 先是四技能，然后再五技能
+        elif len(ALL_JN) == 4:
+            SPARE_JN = {JN1,JN2,JN3,JN4,JN5}
+            GET_JN = SPARE_JN - ALL_JN    # 将要打的技能
+            if ran_num <= 0.2:
+                ALL_JN.add(list(GET_JN)[0])
+                count += 1
+            else:
+                ALL_JN.pop()   # 顶掉的技能
+                ALL_JN.add(list(GET_JN)[0])  
+                count += 1
+            spend += list(GET_JN)[0]
+        
+        elif len(ALL_JN) == 5:
+            print(spend)
+            sum_spend_list.append(spend)
+            break
+        # print(f"目前状态：{ALL_JN}，第{count}打书，花费了{spend}")
+    print(f"内丹五技能模板：第{i}轮，平均花费{sum(sum_spend_list)/len(sum_spend_list)}")
+
